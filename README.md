@@ -97,3 +97,11 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   대신 json 방식이어야함
 -   모델들의 객체를 검증해서 json으로 변경해줌
 -   즉 파이썬 객체에서 JSON 객체로 바꿔주는것을 의미한다.
+
+## 1.3 Class Based View
+
+-   Pagination을 사용하기 위해 setting.py 에 추가
+-   REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    }
