@@ -82,3 +82,11 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   404 not found
 -   500 interner server error
 -   501 not implemented
+
+# 1. INTRODUCTION TO DRF
+
+## 1.1 @api_view
+
+-   pipenv install djangorestframework
+-   config/settings 에 third party app 추가
+-   THIRD_PARTY_APPS = ["rest_framework",]
