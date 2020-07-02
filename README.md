@@ -47,4 +47,23 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 ## 0.6 Intro to REST API's
 
 -   REST api는 서버와 서로 의사 소통을 하는 URL을 사용하는 api
+-   yts.lt 사이트 api 참고, url마다 제공받는게 다 다름
+
+## 0.7 Beautiful REST part one
+
+-   무언가를 요청할때는 GET 요청을함
+-   로그인할때 비밀스러운 form을 이용해서 보낼때는 POST
+-   REST API DESIGN
+-   api에서 동사들을 사용하지 말자 ex) list_movie -> 나쁨
+-   명사는 좋고
+-   복수형은 더 좋음
+-   getAllMoviews,addMovies,deleteMovies -> 이런건 나쁜거다
+-   CRUD
+-   Create - Post
+-   Read - Get
+-   Update - Put
+-   Delete - Delete
+-   /movies/ -> Collection
+-   /movies/the-godfather -> Elements
+-   Formula : Collections + Elemetns + HTTP Verbs
 -
