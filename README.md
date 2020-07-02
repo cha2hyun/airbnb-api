@@ -90,3 +90,10 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   pipenv install djangorestframework
 -   config/settings 에 third party app 추가
 -   THIRD_PARTY_APPS = ["rest_framework",]
+
+## 1.2 Serializers
+
+-   Serializer는 기본적으로 데이터가 보여야하는 방식을 설명해줘야 하는 form이다.
+-   대신 json 방식이어야함
+-   모델들의 객체를 검증해서 json으로 변경해줌
+-   즉 파이썬 객체에서 JSON 객체로 바꿔주는것을 의미한다.
