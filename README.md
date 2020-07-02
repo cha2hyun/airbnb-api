@@ -105,3 +105,8 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
     }
+
+## 1.4 ListAPIView
+
+-   [x] ListRooms
+-   [v] SeeRoom
