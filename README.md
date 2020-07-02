@@ -43,3 +43,8 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   REST와 GraphQL api를 섞어서 사용할것임, 근데 원래 섞어서 쓰진 않음
 -   REST api 가 더 좋다, django rest framework가 있어서
 -   Graph QL은 node.js랑 잘어울림
+
+## 0.6 Intro to REST API's
+
+-   REST api는 서버와 서로 의사 소통을 하는 URL을 사용하는 api
+-
