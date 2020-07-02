@@ -116,3 +116,10 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   viewsets를 사용하면 뭐 아무것도 없이 전부다 가능해짐
 -   패지네이션이나 post,get,delete,put 전부
 -   근데 아무나 막 수정할수 있으면 안되니 약간의 논리가 필요
+
+# 2. BUILDING THE REST API
+
+## 2.1
+
+-   [x] ListRooms
+-   [x] SeeRoom
