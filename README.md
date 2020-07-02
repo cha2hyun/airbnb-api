@@ -66,4 +66,19 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   /movies/ -> Collection
 -   /movies/the-godfather -> Elements
 -   Formula : Collections + Elemetns + HTTP Verbs
--
+
+## 0.8 Beautiful REST part two
+
+-   "?"를 사용한다
+-   /movies?status=now_showing
+-   collection을 사용하면서 ?를 이용해 쿼리인자를 사용하면 됨
+-   Version & Pages
+-   /v1/movies
+-   HTTP
+-   200 ok
+-   201 created
+-   400 bad request
+-   403 forbidden
+-   404 not found
+-   500 interner server error
+-   501 not implemented
