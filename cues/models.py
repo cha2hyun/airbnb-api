@@ -5,16 +5,16 @@ from core.models import CoreModel
 class Cue(CoreModel):
 
     name = models.CharField(max_length=140)
-    address = models.CharField(max_length=140)
     price = models.IntegerField(help_text="USD per night")
-    beds = models.IntegerField(default=1)
-    lat = models.DecimalField(max_digits=10, decimal_places=6)
-    lng = models.DecimalField(max_digits=10, decimal_places=6)
-    bedrooms = models.IntegerField(default=1)
-    bathrooms = models.IntegerField(default=1)
-    check_in = models.TimeField(default="00:00:00")
-    check_out = models.TimeField(default="00:00:00")
-    instant_book = models.BooleanField(default=False)
+    # address = models.CharField(max_length=140)
+    # beds = models.IntegerField(default=1)
+    # lat = models.DecimalField(max_digits=10, decimal_places=6)
+    # lng = models.DecimalField(max_digits=10, decimal_places=6)
+    # bedrooms = models.IntegerField(default=1)
+    # bathrooms = models.IntegerField(default=1)
+    # check_in = models.TimeField(default="00:00:00")
+    # check_out = models.TimeField(default="00:00:00")
+    # instant_book = models.BooleanField(default=False)
     # user = models.ForeignKey(
     #     "users.User", on_delete=models.CASCADE, related_name="rooms"
     # )

@@ -13,8 +13,12 @@ class CuesView(APIView):
     
     def post(self, request):
         serializer = CueSerializer(data=request.data)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
-    
+        if serializer.is_valid():
+            cue = serializer.save()
+            cue_serializer = CueSerializer(cue).data
+            return Response(data=cue_serializer, status=status.HTTP_200_OK)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
     # def get(self, request):
