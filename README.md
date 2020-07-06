@@ -166,3 +166,8 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   대신 action detail = true 면 /rooms/1 에 적용
 -   detail false 면 /rooms에 적용
 -   action 의 함수 이름이 url로 자동 추가됨
+
+## 3.6
+
+-   Permission을 overwirte 할때 has_permission 과 has_object_permission 이 있음
+-   둘중에 뭐쓸지 잘 생각하셈
