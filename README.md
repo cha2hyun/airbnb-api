@@ -157,3 +157,12 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
     return True
 -   씨리얼라이저를 통해 어떤 유저가 지금 이 방을 보고있는지를 확인해야함
 -   request 덕분에 누가 보고잇는지 알 수 있음 . request.user와 context를 통해
+
+## 3.4
+
+-   viewsets를 사용하면 url을 라우터가 알아서 만들어줌
+-   근데 만약에 room/serch url은 어카냐면
+-   viesets extra를 보면댐
+-   대신 action detail = true 면 /rooms/1 에 적용
+-   detail false 면 /rooms에 적용
+-   action 의 함수 이름이 url로 자동 추가됨
