@@ -142,3 +142,18 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   절대 jwt에 민감한 개인정보를 담아선 안됨 누구나 토큰 해독을 할 수 있음
 -   그럼 뭐하러 쓰냐?
 -   누가 우리 토큰을 건들엇냐 안건드렷냐 이걸 확인하기 위해 씀
+
+# 3. MAGIC AND POWER
+
+## 3.1 Dynamic Field
+
+-   sns처럼 만약에 유저에 따라서 좋아요 눌럿는지 안눌렀는지를 알려면
+-   다이나믹 필드를 사용하면됨
+-   만약 is_fav 를 사용한다면
+-   is_fav = serializers.SerializerMethodField()
+-   get is\*fav 라는 함수를 만들어야함 'get\_' 을 붙히면 장고가 알아서 붙음
+-   def get_is_fav(self,obj):
+    print(obj)
+    return True
+-   씨리얼라이저를 통해 어떤 유저가 지금 이 방을 보고있는지를 확인해야함
+-   request 덕분에 누가 보고잇는지 알 수 있음 . request.user와 context를 통해
