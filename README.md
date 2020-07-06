@@ -129,3 +129,16 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 -   post인지 put의 차이는 put에는 instance값이 있음
 -   instanace가 first arguement면 serializer가 create이 아닌 put하고 있다고 인식
 -   serializer의 모든 데이터를 수정할 필요없이 몇개만 수정하고싶으면 partial=True, 안그러면 시리얼라이저의 모든 모델값들에 대해 데이터가 주어져야함
+
+## 2.11 JWT
+
+-   JWT 는 유저에게 긴 스트링을 주고 유저가 해독함
+-   스트링을 가져옴 유저아이디든 이메일이든
+-   이걸 인코딩해서 이상한 값으로 바꿈 (토큰)
+-   유저는 인코딩된걸 다시 우리한테주고
+-   우리는 그걸 다시 디코딩
+-   파이썬 JWT 은 설치해야함 pyJWT
+-   pipenv install pyjwt
+-   절대 jwt에 민감한 개인정보를 담아선 안됨 누구나 토큰 해독을 할 수 있음
+-   그럼 뭐하러 쓰냐?
+-   누가 우리 토큰을 건들엇냐 안건드렷냐 이걸 확인하기 위해 씀
