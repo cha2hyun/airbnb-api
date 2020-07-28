@@ -1,9 +1,8 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 from . import views
 
 app_name = "cues"
+router = DefaultRouter()
+router.register("", views.CueViewSet)
 
-urlpatterns = [
-    path("", views.CuesView.as_view()),
-    path("<int:pk>/", views.CueView.as_view()),
-]
+urlpatterns = router.urls

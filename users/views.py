@@ -69,6 +69,9 @@ class UsersViewSet(ModelViewSet):
                 pass
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+
+
 # class MeView(APIView):
 
 #     permission_classes = [IsAuthenticated]

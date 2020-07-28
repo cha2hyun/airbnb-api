@@ -3,41 +3,34 @@ from core.models import CoreModel
 
 
 class Cue(CoreModel):
+    # 큐가 하대인지 상대인지 
+    # Serializer로 Validate
+    isButt = models.BooleanField(default=False)
+    isShaft = models.BooleanField(default=False)
 
-    name = models.CharField(max_length=140)
-    price = models.IntegerField(help_text="USD per night")
-    # address = models.CharField(max_length=140)
-    # beds = models.IntegerField(default=1)
-    # lat = models.DecimalField(max_digits=10, decimal_places=6)
-    # lng = models.DecimalField(max_digits=10, decimal_places=6)
-    # bedrooms = models.IntegerField(default=1)
-    # bathrooms = models.IntegerField(default=1)
-    # check_in = models.TimeField(default="00:00:00")
-    # check_out = models.TimeField(default="00:00:00")
-    # instant_book = models.BooleanField(default=False)
-    # user = models.ForeignKey(
-    #     "users.User", on_delete=models.CASCADE, related_name="rooms"
-    # )
+    # 큐 이름
+    # 큐의 시리얼 번호, 없으면 빈칸 가능
+    productName = models.CharField(default=False, max_length=140)
+    productNumber = models.CharField(default=False, max_length=140, blank=True)
+    
+    # 구매 구객
+    # 출고일
+    purchasedCustomer = models.CharField(max_length=140)
+    purchasedDate = models.DateTimeField(auto_now_add=True)
+    
+    # 보증서 번호 - Serializer에서 자동 생성
+    # 보증 기간 - Serializer에서 하대면 1년 상대면 6개월
+    # 보증 담당자 
+    warrantyNumber = models.CharField(max_length=140, blank=True) 
+    warrantyDate = models.DateTimeField(blank=False)
+    warrantyManager = models.CharField(max_length=140)
+    
+    
+
 
     def __str__(self):
-        return self.name
-
-    def photo_number(self):
-        return self.photos.count()
-
-    photo_number.short_description = "Photo Count"
+        return "보증번호 : " + self.warrantyNumber
 
     class Meta:
         ordering = ["-pk"]
 
-
-class Photo(CoreModel):
-
-    file = models.ImageField()
-    cue = models.ForeignKey(
-        "cues.Cue", related_name="photos", on_delete=models.CASCADE
-    )
-    caption = models.CharField(max_length=140)
-
-    def __str__(self):
-        return self.cue.name

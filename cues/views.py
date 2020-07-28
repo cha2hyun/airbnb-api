@@ -1,82 +1,70 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+import jwt
+import base64
+import sys
+from django.conf import settings
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework import permissions
 from .models import Cue
 from .serializers import CueSerializer
+from rest_framework.response import Response
 
 
-class CuesView(APIView):
-    def get(self, request):
-        cues = Cue.objects.all()
-        serializer = CueSerializer(cues,many=True).data
+
+class CueViewSet(ModelViewSet):
+
+    queryset = Cue.objects.all()
+    serializer_class = CueSerializer
+    pagination_class = None
+
+    # encoded_jwt = jwt.encode({"warrantyNumber": cue.warrantyNumber}, settings.SECRET_KEY, algorithm="HS256")
+    # b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3YXJyYW50eU51bWJlciI6IjIwLTAwMDYwIn0.bh6Sd_Hv8bvbWsrOM56ovfzu-ZEAak1EY74fA-SYVnM'
+
+    @action(detail=False)
+    def search(self, request):
+        productName = request.GET.get("sn", None)        
+        secretcode = request.GET.get("secretcode", None)
+        decode_warrantyNumber = None
+        if secretcode is not None:
+            secretcode = secretcode[2:-1]
+            encode_warrantyNumber = secretcode.encode('utf-8')
+            decode_warrantyNumber = jwt.decode(encode_warrantyNumber, settings.SECRET_KEY, algorithms="HS256")
+            decode_warrantyNumber = list(decode_warrantyNumber.values())[0]
+        
+        filter_kwargs = {}
+
+        if productName is not None:
+            filter_kwargs["warrantyNumber"] = productName
+        try:
+            cues = Cue.objects.filter(**filter_kwargs)
+        except ValueError:
+            cues = Cue.objects.all()
+
+        if decode_warrantyNumber is not None:
+            filter_kwargs["warrantyNumber"] = decode_warrantyNumber
+        try:
+            cues = Cue.objects.filter(**filter_kwargs)
+        except ValueError:
+            cues = Cue.objects.all()
+
+        
+        serializer = CueSerializer(cues, many=True).data
         return Response(serializer)
-    
-    def post(self, request):
-        serializer = CueSerializer(data=request.data)
-        if serializer.is_valid():
-            cue = serializer.save()
-            cue_serializer = CueSerializer(cue).data
-            return Response(data=cue_serializer, status=status.HTTP_200_OK)
-        else:
-            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    
-    # def get(self, request):
-    #     rooms = Room.objects.all()[:5]
-    #     serializer = CueSerializer(rooms, many=True).data
-    #     return Response(serializer)
-
-    # def post(self, request):
-    #     if not request.user.is_authenticated:
-    #         return Response(status=status.HTTP_401_UNAUTHORIZED)
-    #     serializer = CueSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         room = serializer.save(user=request.user)
-    #         room_serializer = CueSerializer(room).data
-    #         return Response(data=room_serializer, status=status.HTTP_200_OK)
-    #     else:
-    #         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CueView(APIView):
-    pass
-    # def get_room(self, pk):
-    #     try:
-    #         room = Room.objects.get(pk=pk)
-    #         return room
-    #     except Room.DoesNotExist:
-    #         return None
 
-    # def get(self, request, pk):
-    #     room = self.get_room(pk)
-    #     if room is not None:
-    #         serializer = CueSerializer(room).data
-    #         return Response(serializer)
-    #     else:
-    #         return Response(status=status.HTTP_404_NOT_FOUND)
+        # results = paginator.paginate_queryset(cues, request)
+        # serializer = CueSerializer(results, many=True)
+        # return paginator.get_paginated_response(serializer.data)
 
-    # def put(self, request, pk):
-    #     room = self.get_room(pk)
-    #     if room is not None:
-    #         if room.user != request.user:
-    #             return Response(status=status.HTTP_403_FORBIDDEN)
-    #         serializer = CueSerializer(room, data=request.data, partial=True)
-    #         if serializer.is_valid():
-    #             room = serializer.save()
-    #             return Response(CueSerializer(room).data)
-    #         else:
-    #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #         return Response()
-    #     else:
-    #         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    # def delete(self, request, pk):
-    #     room = self.get_room(pk)
-    #     if room is not None:
-    #         if room.user != request.user:
-    #             return Response(status=status.HTTP_403_FORBIDDEN)
-    #         room.delete()
-    #         return Response(status=status.HTTP_200_OK)
-    #     else:
-    #         return Response(status=status.HTTP_404_NOT_FOUND)
-    
+        # serializer = CueSerializer(cues, many=True)
+        # return Response(data=serializer, status=status.HTTP_200_OK)
+        
+        # results = self.paginate_queryset(cues, request)
+        # serializer = CueSerializer(results, many=True)
+        # return Response(serializer.data)
+
+        # room = serializer.save(user=request.user)
+#       room_serializer = RoomSerializer(room).data
+#       return Response(data=room_serializer, status=status.HTTP_200_OK)

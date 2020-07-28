@@ -25,7 +25,7 @@ SECRET_KEY = "cc)*5=(s+i2-&9x7&&&o+y7$g5!db3tvu85ykok#mwxf#6gir2"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["14.63.15.1", "localhost", "127.0.0.1", "14.63.15.1:3000", "127.0.0.1:3000","192.168.0.14","192.168.0.14:3000",]
 
 
 # Application definition
@@ -38,6 +38,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
 ]
 
 PROJECT_APPS = [
@@ -47,11 +48,13 @@ PROJECT_APPS = [
     "cues.apps.CuesConfig",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework",]
+THIRD_PARTY_APPS = ["rest_framework","corsheaders",]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',   
+    'django.middleware.common.CommonMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -60,6 +63,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://14.63.15.1:3000', 'http://192.168.0.14:3000',]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "config.urls"
 

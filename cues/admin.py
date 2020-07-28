@@ -6,11 +6,14 @@ from . import models
 class CueAdmin(admin.ModelAdmin):
 
     list_display = (
-        "name",
-        "photo_number",
+        "isButt",
+        "isShaft",
+        "productName",
+        "productNumber",
+        "purchasedCustomer",
+        "purchasedDate",
+        "warrantyNumber",
+        "warrantyDate",
+        "warrantyManager"
     )
 
-
-@admin.register(models.Photo)
-class PhotoAdmin(admin.ModelAdmin):
-    pass
