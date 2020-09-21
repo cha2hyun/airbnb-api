@@ -23,8 +23,8 @@ class CueSerializer(serializers.ModelSerializer):
         cue = super().create(validated_data)
 
         # 보증서 번호 생성
-        # format : 두자리 현재년도 + 카운트(PK 최대 다섯자리로 가정)
-        # ex) 20년도에 판매된 30번째 => 20-00030
+        # format : 두자리 현재년도 + 카운트(PK 최대 여섯자리로 가정)
+        # ex) 20년도에 판매된 300번째 => 20-0000300
         if(0 < cue.pk < 10):
             set_warrantyNumber = str(datetime.today().year%100) + "-00000" + str(cue.pk)
         elif(10 <= cue.pk < 100):
@@ -37,16 +37,21 @@ class CueSerializer(serializers.ModelSerializer):
             set_warrantyNumber = str(datetime.today().year%100) + "-0" + str(cue.pk)
         else:
             set_warrantyNumber = str(datetime.today().year%100) + "-" + str(cue.pk)
-
         cue.warrantyNumber = set_warrantyNumber
 
         # 보증일 생성
         if cue.isButt:
-            cue.warrantyDate = cue.purchasedDate + relativedelta(months=12)
-            
+            cue.warrantyDate = cue.purchasedDate + relativedelta(months=12)     
         if cue.isShaft:
             cue.warrantyDate = cue.purchasedDate + relativedelta(months=6)
-            
+       
+        
+        # 고객 이름 중간에 * 넣기
+        lst = list(cue.purchasedCustomer)
+        lst[1:-1] = "*"        
+        cue.purchasedCustomerProtectedName = "".join(lst)
+        
+
         cue.save()
         return cue
     
