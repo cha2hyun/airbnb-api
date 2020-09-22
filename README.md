@@ -171,3 +171,16 @@ REST & GraphQL API of the Airbnb Clone using Django REST Framework and Graphene 
 
 -   Permission을 overwirte 할때 has_permission 과 has_object_permission 이 있음
 -   둘중에 뭐쓸지 잘 생각하셈
+
+### migrate error 해결
+
+1. 프로젝트 내에 모든 마이그레이션 파일 제거
+
+-   **init**.py를 제외한 모든것을 제거
+-   find . -path "_/migrations/_.py" -not -name "**init**.py" -delete
+-   find . -path "_/migrations/_.pyc" -delete
+
+2. 초기화후 스키마 생성
+
+-   python manage.py makemigrations
+-   python manage.py migrate
